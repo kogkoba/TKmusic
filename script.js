@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             console.log(`処理中の曲: ${song.name}, 画像ID: ${song.imageId}, MP3 ID: ${song.mp3Id}`);
 
             let button = document.createElement("img");
-            button.src = `https://drive.google.com/thumbnail?id=${song.imageId}`;
+            button.src = `https://drive.google.com/uc?export=view&id=${song.imageId}`;
             button.alt = song.name;
             button.classList.add("music-button");
 
