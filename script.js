@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", async function () {
     const GAS_URL = "https://script.google.com/macros/s/AKfycbx_HuAOaCn8j3P5mKSWGReX2ehoaIAwBsWgYL-paKQ_r0F2t99mNQmEIUo9VQAcQ7W5dA/exec";
     const musicGrid = document.getElementById("musicGrid");
+    let currentAudio = null; // 現在の再生中オーディオ
 
     try {
         let response = await fetch(GAS_URL);
@@ -17,7 +18,15 @@ document.addEventListener("DOMContentLoaded", async function () {
             button.classList.add("music-button");
 
             button.addEventListener("click", function () {
-                window.open(`https://drive.google.com/file/d/${song.mp3Id}/preview`, "_blank");
+                // すでに再生中の曲があれば停止
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                }
+
+                // 新しいオーディオを作成
+                currentAudio = new Audio(`https://docs.google.com/uc?export=open&id=${song.mp3Id}`);
+                currentAudio.play();
             });
 
             musicGrid.appendChild(button);
