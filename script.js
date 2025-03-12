@@ -3,8 +3,8 @@
 let audio = null;
 
 async function playAudio(fileId) {
-    const url = `https://script.google.com/macros/s/YOUR_GAS_DEPLOYMENT_ID/exec?fileId=${fileId}`;
-    
+    const url = `https://script.google.com/macros/s/AKfycbx_HuAOaCn8j3P5mKSWGReX2ehoaIAwBsWgYL-paKQ_r0F2t99mNQmEIUo9VQAcQ7W5dA/exec?fileId=${fileId}`;
+
     try {
         const response = await fetch(url);
         if (!response.ok) throw new Error(`Fetch error: ${response.status}`);
@@ -27,7 +27,7 @@ async function playAudio(fileId) {
 
 // スプレッドシートのデータを取得してプレイリストを作成
 async function loadSongs() {
-    const url = "https://script.google.com/macros/s/YOUR_GAS_DEPLOYMENT_ID/exec";
+    const url = "https://script.google.com/macros/s/AKfycbx_HuAOaCn8j3P5mKSWGReX2ehoaIAwBsWgYL-paKQ_r0F2t99mNQmEIUo9VQAcQ7W5dA/exec";
 
     try {
         const response = await fetch(url);
