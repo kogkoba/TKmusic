@@ -9,15 +9,22 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* 通常時のボタン */
-#playButton {
-  width: 150px;
+#musicGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  justify-content: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.music-button {
+  width: 100px;
+  height: 100px;
   cursor: pointer;
   transition: 0.3s;
 }
 
-/* 再生中のボタン（色を変えて押せないことを視覚的に表現） */
-#playButton.disabled {
-  filter: grayscale(70%) brightness(70%);
-  pointer-events: none;
+.music-button:hover {
+  transform: scale(1.1);
 }
