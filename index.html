@@ -1,1 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Play Audio from Start</title>
+</head>
+<body>
+  <!-- audio 要素に任意の音源を設定する -->
+  <audio id="myAudio" src="audio-file.mp3"></audio>
+
+  <!-- 再生ボタン -->
+  <button id="playButton">再生</button>
+
+  <script>
+    // ボタンを押すたびに頭から再生
+    document.getElementById('playButton').addEventListener('click', function() {
+      var audio = document.getElementById('myAudio');
+      audio.currentTime = 0; // 頭出し
+      audio.play();          // 再生
+    });
+  </script>
+</body>
+</html>
 
