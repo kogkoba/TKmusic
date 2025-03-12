@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             console.log(`処理中の曲: ${song.name}, 画像ID: ${song.imageId}, MP3 ID: ${song.mp3Id}`); // 🔥 確認用
 
             let button = document.createElement("img");
-            button.src = `https://drive.google.com/uc?export=view&id=${song.imageId}`;
+            button.src = `https://drive.google.com/thumbnail?id=${song.imageId}`;
+
             button.alt = song.name;
             button.classList.add("music-button");
 
@@ -22,9 +23,24 @@ document.addEventListener("DOMContentLoaded", async function () {
                     currentAudio.pause();
                     currentAudio.currentTime = 0;
                 }
-                currentAudio = new Audio(`https://drive.google.com/file/d/${song.mp3Id}/preview`);
-                currentAudio.play();
-            });
+                async function playAudio(url) {
+    try {
+        let response = await fetch(url);
+        let blob = await response.blob();
+        let objectURL = URL.createObjectURL(blob);
+
+        if (currentAudio) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+        }
+
+        currentAudio = new Audio(objectURL);
+        currentAudio.play();
+    } catch (error) {
+        console.error("MP3の再生に失敗しました:", error);
+    }
+}
+
 
             musicGrid.appendChild(button);
         });
