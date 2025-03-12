@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         songs.forEach(song => {
             let button = document.createElement("img");
-            button.src = `https://drive.google.com/uc?id=${song.imageId}`;
+            button.src = `https://drive.google.com/uc?export=view&id=${song.imageId}`;
             button.alt = song.name;
             button.classList.add("music-button");
 
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 }
 
                 // 新しいオーディオを作成
-                currentAudio = new Audio(`https://drive.google.com/uc?export=download&id=${song.mp3Id}`);
+                currentAudio = new Audio(`https://drive.google.com/file/d/${song.mp3Id}/preview`);
                 currentAudio.play();
             });
 
