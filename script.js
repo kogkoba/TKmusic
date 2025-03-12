@@ -1,19 +1,11 @@
 // 画面切り替え用のDOM取得
-const loginScreen = document.getElementById('login-screen');
 const selectionScreen = document.getElementById('selection-screen');
 const musicScreen = document.getElementById('music-screen');
 
 // ボタン取得
-const loginBtn = document.getElementById('login-btn');
 const musicSelectBtn = document.getElementById('music-select-btn');
 const musicImg = document.getElementById('music-img');
 const musicAudio = document.getElementById('music-audio');
-
-// ログインボタン：選択画面へ切り替え
-loginBtn.addEventListener('click', () => {
-  loginScreen.style.display = 'none';
-  selectionScreen.style.display = 'block';
-});
 
 // 選択画面の音楽ボタン：音楽再生画面へ切り替え
 musicSelectBtn.addEventListener('click', () => {
