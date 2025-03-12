@@ -1,1 +1,23 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 50px;
+}
 
+h1 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+/* 通常時のボタン */
+#playButton {
+  width: 150px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* 再生中のボタンの見た目 (色を薄くして押せないように) */
+#playButton.disabled {
+  filter: grayscale(70%) brightness(70%);
+  pointer-events: none;
+}
