@@ -10,14 +10,7 @@ body {
   padding: 20px;
 }
 
-/* 入力・ボタンのスタイル */
-input {
-  padding: 8px;
-  margin: 8px;
-  width: 200px;
-  font-size: 16px;
-}
-
+/* ボタンのスタイル */
 button {
   padding: 10px 20px;
   font-size: 16px;
