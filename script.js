@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 }
 
                 // MP3のURLを直接 `audio` タグにセット
-                currentAudio.src = `https://drive.google.com/uc?export=preview&id=${song.mp3Id}`;
+                currentAudio.src = `https://drive.google.com/uc?export=open&id=${song.mp3Id}`;
                 currentAudio.play();
             });
 
