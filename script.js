@@ -24,9 +24,12 @@ document.addEventListener("DOMContentLoaded", async function () {
                     currentAudio.currentTime = 0;
                 }
 
-                // MP3のURLを直接 `audio` タグにセット
-                currentAudio.src = `https://drive.google.com/uc?export=open&id=${song.mp3Id}`;
-                currentAudio.play();
+                // Google Driveの直接再生URL
+                let mp3Url = `https://docs.google.com/uc?export=download&id=${song.mp3Id}`;
+                
+                // audio タグでMP3を再生
+                currentAudio.src = mp3Url;
+                currentAudio.play().catch(error => console.error("MP3の再生に失敗しました:", error));
             });
 
             musicGrid.appendChild(button);
