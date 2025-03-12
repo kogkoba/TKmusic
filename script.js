@@ -7,7 +7,7 @@ const musicSelectBtn = document.getElementById('music-select-btn');
 const musicImg = document.getElementById('music-img');
 const musicAudio = document.getElementById('music-audio');
 
-// 選択画面の音楽ボタン：音楽再生画面へ切り替え
+// 選択画面の「音楽」ボタン：音楽再生画面へ切り替え
 musicSelectBtn.addEventListener('click', () => {
   selectionScreen.style.display = 'none';
   musicScreen.style.display = 'block';
@@ -18,13 +18,14 @@ let isPlaying = false;
 
 // 画像クリック時の処理
 musicImg.addEventListener('click', () => {
-  // 再生中は何もしない
+  // 再生中は何もしない（連打防止）
   if (isPlaying) return;
 
   // 再生開始
   musicAudio.currentTime = 0;
   musicAudio.play();
   isPlaying = true;
+
   // 画像に無効状態用のクラスを追加（色を変更して視覚的に分かるように）
   musicImg.classList.add('disabled');
 
