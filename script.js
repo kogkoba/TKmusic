@@ -1,40 +1,53 @@
-document.addEventListener("DOMContentLoaded", async function () {
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbx_HuAOaCn8j3P5mKSWGReX2ehoaIAwBsWgYL-paKQ_r0F2t99mNQmEIUo9VQAcQ7W5dA/exec";
-    const musicGrid = document.getElementById("musicGrid");
-    let currentAudio = new Audio();
+// main.js
+
+let audio = null;
+
+async function playAudio(fileId) {
+    const url = `https://script.google.com/macros/s/YOUR_GAS_DEPLOYMENT_ID/exec?fileId=${fileId}`;
+    
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Fetch error: ${response.status}`);
+
+        const blob = await response.blob();
+        const audioUrl = URL.createObjectURL(blob);
+
+        // 既に再生中なら停止
+        if (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+
+        audio = new Audio(audioUrl);
+        audio.play();
+    } catch (error) {
+        console.error("再生エラー:", error);
+    }
+}
+
+// スプレッドシートのデータを取得してプレイリストを作成
+async function loadSongs() {
+    const url = "https://script.google.com/macros/s/YOUR_GAS_DEPLOYMENT_ID/exec";
 
     try {
-        let response = await fetch(GAS_URL);
-        let songs = await response.json();
+        const response = await fetch(url);
+        const data = await response.json();
 
-        console.log("取得したデータ:", songs);
+        // ページ上に曲リストを生成
+        const songList = document.getElementById("songList");
+        data.forEach(row => {
+            const songName = row.songName;
+            const fileId = row.fileId;
 
-        songs.forEach(song => {
-            console.log(`処理中の曲: ${song.name}, 画像ID: ${song.imageId}, MP3 ID: ${song.MP3ID}`);
-
-            let button = document.createElement("img");
-            button.src = `https://lh3.googleusercontent.com/d/${song.imageId}`;
-            button.alt = song.name;
-            button.classList.add("music-button");
-
-            button.addEventListener("click", function () {
-                // すでに再生中の曲があれば停止
-                if (!currentAudio.paused) {
-                    currentAudio.pause();
-                    currentAudio.currentTime = 0;
-                }
-
-                // Google Driveの直接再生URL
-                let mp3Url = `https://docs.google.com/uc?export=download&id=${song.mp3Id}`;
-                
-                // audio タグでMP3を再生
-                currentAudio.src = mp3Url;
-                currentAudio.play().catch(error => console.error("MP3の再生に失敗しました:", error));
-            });
-
-            musicGrid.appendChild(button);
+            const button = document.createElement("button");
+            button.textContent = songName;
+            button.onclick = () => playAudio(fileId);
+            songList.appendChild(button);
         });
     } catch (error) {
-        console.error("音楽データの取得に失敗しました:", error);
+        console.error("スプレッドシートの読み込みエラー:", error);
     }
-});
+}
+
+// ページ読み込み時に曲リストをロード
+window.onload = loadSongs;
