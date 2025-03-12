@@ -6,17 +6,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- ログイン画面 -->
-  <div id="login-screen" class="screen">
-    <h1>ログイン</h1>
-    <!-- シンプルなダミーログイン -->
-    <input type="text" placeholder="ユーザー名">
-    <input type="password" placeholder="パスワード">
-    <button id="login-btn">ログイン</button>
-  </div>
-
   <!-- 選択画面 -->
-  <div id="selection-screen" class="screen" style="display:none;">
+  <div id="selection-screen" class="screen">
     <h1>選択画面</h1>
     <!-- 今は「音楽」だけ -->
     <button id="music-select-btn">音楽</button>
@@ -27,7 +18,7 @@
     <h1>音楽再生</h1>
     <!-- Google Driveの画像を表示 -->
     <img id="music-img" src="https://drive.google.com/uc?export=view&id=1g_mOPwH3adlewnROT7uBKiFMi4fuYtIX" alt="Music Cover" />
-    <!-- Audio要素（controlsは非表示にしてJS制御） -->
+    <!-- Audio要素 -->
     <audio id="music-audio" src="asset/music/korenanda.mp3"></audio>
   </div>
 
