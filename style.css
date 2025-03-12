@@ -1,26 +1,38 @@
-/* styles.css */
-
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
 }
 
-#songList {
-    margin-top: 20px;
+.screen {
+  padding: 20px;
+}
+
+/* 入力・ボタンのスタイル */
+input {
+  padding: 8px;
+  margin: 8px;
+  width: 200px;
+  font-size: 16px;
 }
 
 button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-button:hover {
-    background-color: #0056b3;
+/* 画像のスタイル */
+#music-img {
+  max-width: 300px;
+  cursor: pointer;
+  transition: filter 0.3s;
+}
+
+/* 無効状態の画像（例：グレースケールに変更） */
+#music-img.disabled {
+  filter: grayscale(100%);
+  cursor: not-allowed;
 }
