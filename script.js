@@ -1,25 +1,9 @@
 document.addEventListener("DOMContentLoaded", async function () {
     const GAS_URL = "https://script.google.com/macros/s/AKfycbx_HuAOaCn8j3P5mKSWGReX2ehoaIAwBsWgYL-paKQ_r0F2t99mNQmEIUo9VQAcQ7W5dA/exec";
     const musicGrid = document.getElementById("musicGrid");
-    let currentAudio = null;
-
-    async function playAudio(url) {
-        try {
-            let response = await fetch(url);
-            let blob = await response.blob();
-            let objectURL = URL.createObjectURL(blob);
-
-            if (currentAudio) {
-                currentAudio.pause();
-                currentAudio.currentTime = 0;
-            }
-
-            currentAudio = new Audio(objectURL);
-            currentAudio.play();
-        } catch (error) {
-            console.error("MP3の再生に失敗しました:", error);
-        }
-    }
+    const playerContainer = document.createElement("div");
+    document.body.appendChild(playerContainer);
+    let currentPlayer = null; // 現在のプレイヤー
 
     try {
         let response = await fetch(GAS_URL);
@@ -36,8 +20,19 @@ document.addEventListener("DOMContentLoaded", async function () {
             button.classList.add("music-button");
 
             button.addEventListener("click", function () {
-                let mp3Url = `https://drive.google.com/uc?export=download&id=${song.mp3Id}`;
-                playAudio(mp3Url);
+                // すでに再生中なら削除
+                if (currentPlayer) {
+                    currentPlayer.remove();
+                }
+
+                // 新しい `iframe` で `preview` を開く
+                currentPlayer = document.createElement("iframe");
+                currentPlayer.src = `https://drive.google.com/file/d/${song.mp3Id}/preview`;
+                currentPlayer.width = "0"; // 非表示にする
+                currentPlayer.height = "0";
+                currentPlayer.style.display = "none";
+
+                playerContainer.appendChild(currentPlayer);
             });
 
             musicGrid.appendChild(button);
