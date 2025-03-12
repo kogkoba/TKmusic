@@ -31,3 +31,4 @@ document.addEventListener("DOMContentLoaded", async function () {
         console.error("音楽データの取得に失敗しました:", error);
     }
 });
+
