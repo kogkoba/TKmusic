@@ -3,23 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MP3を1回だけ再生（連打防止）</title>
+  <title>音楽選択</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <h1>１回だけ再生</h1>
-
-  <!-- オーディオ要素 -->
-  <audio id="myAudio">
-    <source src="https://www.dropbox.com/scl/fi/dqijswmlc6uj9upld9rx4/.mp3?rlkey=d5d7pe6bs3da7hv5xtzddzu0q&st=18a0os3n&dl=1" type="audio/mp3">
-    ブラウザが audio タグに対応していません。
-  </audio>
-
-  <!-- 再生ボタン (画像) -->
-  <img id="playButton" src="https://www.dropbox.com/scl/fi/20ehisakxzab4jd9dveh4/player_button_saisei.png?rlkey=fdse8513ac8oaqv0riapvtdzp&st=34cl33fq&dl=1" alt="再生ボタン">
+  <h1>聞きたい曲はどれかな？</h1>
+  
+  <div id="musicGrid"></div>
+  
+  <audio id="audioPlayer" controls></audio>
 
   <script src="script.js"></script>
-
 </body>
 </html>
