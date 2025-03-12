@@ -2,40 +2,24 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <title>Dropbox MP3を1回だけ再生</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dropbox MP3 1回再生</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>再生ボタン(画像)を押すと曲が1回だけ再生されます</h1>
 
-  <!-- 1) 再生したい音源 (Dropboxの共有リンク末尾を dl=1 に変更) -->
-  <audio id="myAudio" src="https://www.dropbox.com/scl/fi/dqijswmlc6uj9upld9rx4/.mp3?rlkey=d5d7pe6bs3da7hv5xtzddzu0q&st=18a0os3n&dl=1"></audio>
+  <h1>再生ボタンを押すと曲が1回だけ再生されます</h1>
 
-  <!-- 2) 再生ボタンとして利用する画像 (末尾を dl=1 に変更) -->
-  <img
-    id="playButton"
-    src="https://www.dropbox.com/scl/fi/20ehisakxzab4jd9dveh4/player_button_saisei.png?rlkey=fdse8513ac8oaqv0riapvtdzp&st=34cl33fq&dl=1"
-    alt="再生ボタン"
-    style="cursor: pointer;"
-  >
+  <!-- オーディオ要素 -->
+  <audio id="myAudio">
+    <source src="https://www.dropbox.com/scl/fi/dqijswmlc6uj9upld9rx4/.mp3?rlkey=d5d7pe6bs3da7hv5xtzddzu0q&st=18a0os3n&dl=1" type="audio/mp3">
+    ブラウザが audio タグに対応していません。
+  </audio>
 
-  <script>
-    // 1回再生したかどうかを判定するためのフラグ
-    let playedOnce = false;
+  <!-- 再生ボタン (画像) -->
+  <img id="playButton" src="https://www.dropbox.com/scl/fi/20ehisakxzab4jd9dveh4/player_button_saisei.png?rlkey=fdse8513ac8oaqv0riapvtdzp&st=34cl33fq&dl=1" alt="再生ボタン">
 
-    // img要素がクリックされたときの処理
-    document.getElementById('playButton').addEventListener('click', function() {
-      if (!playedOnce) {
-        // まだ再生していない場合のみ再生
-        const audio = document.getElementById('myAudio');
-        audio.currentTime = 0; // 曲頭に戻す
-        audio.play();          // 再生
-        playedOnce = true;     // フラグを立てる
-      } else {
-        // 既に再生済みならアラートを出すなどして再生を防ぐ
-        alert("この曲は1回だけ再生できます。");
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 
 </body>
 </html>
