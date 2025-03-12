@@ -1,21 +1,15 @@
-async function playAudio(fileId) {
-    const url = `https://script.google.com/macros/s/AKfycbyEKyr-gjofu4v0HJpa9nHSZQLm5WNkOneYsbboeB5Wqerz2Xexw-GTwS-4MozFzUgGMg/exec?fileId=${fileId}`;
-    
+function serveFile(fileId) {
     try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`Fetch error: ${response.status}`);
-
-        const blob = await response.blob();
-        const audioUrl = URL.createObjectURL(blob);
-
-        if (audio) {
-            audio.pause();
-            audio.currentTime = 0;
-        }
-
-        audio = new Audio(audioUrl);
-        audio.play();
+        Logger.log("Requesting fileId: " + fileId);
+        const file = DriveApp.getFileById(fileId);
+        Logger.log("File found: " + file.getName());
+        const blob = file.getBlob();
+        
+        return ContentService.createTextOutput(blob.getBytes())
+            .setMimeType("audio/mpeg"); // MP3のMIMEタイプを明示的に設定
     } catch (error) {
-        console.error("再生エラー:", error);
+        Logger.log("Error: " + error);
+        return ContentService.createTextOutput(`Error: File not found - ${fileId}`)
+            .setMimeType(ContentService.MimeType.TEXT);
     }
 }
